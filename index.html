@@ -37,6 +37,9 @@
 
     <button id="calculate-btn">Aprēķināt vērtējumu</button>
     <p id="result"></p>
+    <br>
+    <h2>Vēsture</h2>
+    <p id="history"></p>
 
     <script>
         const calculateBtn = document.getElementById("calculate-btn");
@@ -45,6 +48,8 @@
         const maxPointsInput = document.getElementById("max-points");
         const gradingSchemeSelect = document.getElementById("grading-scheme");
         const resultDiv = document.getElementById("result");
+        const historyOutput = document.getElementById("history")
+        historyArray = []
 
         function handleClick() {
             const name = nameInput.value;
@@ -89,8 +94,14 @@
                     grade = "Jūsu burtu vērtējums ir: F";
                 }
             }
-
+            history(name, points, maxPoints, gradingScheme, grade)
             resultDiv.innerHTML = grade;
+        }
+
+        function history(name, points, maxPoints, gradingScheme, grade) {
+            console.log(1)
+            historyArray += `Persona: ${name} <br> Punkti ieguti: ${points} <br> Maksimalie Punkti ${maxPoints} <br> Vērtējuma tips: ${gradingScheme} <br> Atzīme ${grade} <br> <br>`
+            historyOutput.innerHTML = historyArray
         }
 
         calculateBtn.addEventListener("click", handleClick);
