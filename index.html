@@ -51,10 +51,14 @@
             const points = parseFloat(pointsInput.value);
             const maxPoints = parseFloat(maxPointsInput.value);
             const gradingScheme = gradingSchemeSelect.value;
+            if (validate(name, points, maxPoints) == 1) {
+                output(name, points, maxPoints, gradingScheme)
+            }
+        }
 
-            // Validate inputs
+        function validate(name, points, maxPoints) {
             if (!name || isNaN(points) || isNaN(maxPoints) || maxPoints <= 0) {
-                console.log(points || maxPoints)
+                console.log(points)
                 resultDiv.innerHTML = "Lūdzu, aizpildiet visus laukus pareizi.";
                 return;
             }
@@ -63,7 +67,10 @@
                     "Iegūtie punkti nedrīkst pārsniegt maksimālos punktus.";
                 return;
             }
+            return 1;
+        }
 
+        function output(name, points, maxPoints, gradingScheme) {
             grade = "";
             if (gradingScheme === "percentage") {
                 const percentage = (points / maxPoints) * 100;
